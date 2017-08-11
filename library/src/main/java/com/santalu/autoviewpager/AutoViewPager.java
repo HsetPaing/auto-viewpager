@@ -90,15 +90,16 @@ public class AutoViewPager extends ViewPager {
                     mStartX = event.getX();
                     break;
             }
+            return super.onInterceptTouchEvent(event);
         } catch (IllegalStateException e) {
             e.printStackTrace();
         }
-        return super.onInterceptTouchEvent(event);
+        return false;
     }
 
     @Override public boolean onTouchEvent(MotionEvent event) {
-        if (mIndeterminate) {
-            try {
+        try {
+            if (mIndeterminate) {
                 if (getCurrentItem() == 0 || getCurrentItem() == getAdapter().getCount() - 1) {
                     final int action = event.getAction();
                     float x = event.getX();
@@ -116,10 +117,11 @@ public class AutoViewPager extends ViewPager {
                 } else {
                     mStartX = 0;
                 }
-            } catch (IllegalStateException e) {
-                e.printStackTrace();
             }
+            return super.onTouchEvent(event);
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
         }
-        return super.onTouchEvent(event);
+        return false;
     }
 }
