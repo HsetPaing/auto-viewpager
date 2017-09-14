@@ -16,12 +16,12 @@ public class AutoViewPager extends ViewPager {
 
     private static final int DEFAULT_DURATION = 10000;
 
-    private int mDuration = DEFAULT_DURATION;
-    private float mStartX;
-    private boolean mAutoScrollEnabled;
-    private boolean mIndeterminate;
+    private int duration = DEFAULT_DURATION;
+    private float startX;
+    private boolean autoScrollEnabled;
+    private boolean indeterminate;
 
-    private final Runnable mAutoScroll = new Runnable() {
+    private final Runnable autoScroll = new Runnable() {
         @Override public void run() {
             if (!isShown()) {
                 return;
@@ -31,7 +31,7 @@ public class AutoViewPager extends ViewPager {
             } else {
                 setCurrentItem(getCurrentItem() + 1);
             }
-            postDelayed(mAutoScroll, mDuration);
+            postDelayed(autoScroll, duration);
         }
     };
 
@@ -56,14 +56,14 @@ public class AutoViewPager extends ViewPager {
     }
 
     public void setIndeterminate(boolean indeterminate) {
-        mIndeterminate = indeterminate;
+        this.indeterminate = indeterminate;
     }
 
     public void setAutoScrollEnabled(boolean enabled) {
-        if (mAutoScrollEnabled == enabled) {
+        if (autoScrollEnabled == enabled) {
             return;
         }
-        mAutoScrollEnabled = enabled;
+        autoScrollEnabled = enabled;
         stopAutoScroll();
         if (enabled) {
             startAutoScroll();
@@ -71,15 +71,15 @@ public class AutoViewPager extends ViewPager {
     }
 
     public void setDuration(int duration) {
-        mDuration = duration;
+        this.duration = duration;
     }
 
     private void startAutoScroll() {
-        postDelayed(mAutoScroll, mDuration);
+        postDelayed(autoScroll, duration);
     }
 
     private void stopAutoScroll() {
-        removeCallbacks(mAutoScroll);
+        removeCallbacks(autoScroll);
     }
 
     @Override public boolean onInterceptTouchEvent(MotionEvent event) {
@@ -87,7 +87,7 @@ public class AutoViewPager extends ViewPager {
             int action = event.getActionMasked();
             switch (action) {
                 case MotionEvent.ACTION_DOWN:
-                    mStartX = event.getX();
+                    startX = event.getX();
                     break;
             }
             return super.onInterceptTouchEvent(event);
@@ -99,13 +99,13 @@ public class AutoViewPager extends ViewPager {
 
     @Override public boolean onTouchEvent(MotionEvent event) {
         try {
-            if (mIndeterminate) {
+            if (indeterminate) {
                 if (getCurrentItem() == 0 || getCurrentItem() == getAdapter().getCount() - 1) {
                     final int action = event.getAction();
                     float x = event.getX();
                     switch (action & MotionEvent.ACTION_MASK) {
                         case MotionEvent.ACTION_UP:
-                            if (getCurrentItem() == getAdapter().getCount() - 1 && x < mStartX) {
+                            if (getCurrentItem() == getAdapter().getCount() - 1 && x < startX) {
                                 post(new Runnable() {
                                     @Override public void run() {
                                         setCurrentItem(0);
@@ -115,7 +115,7 @@ public class AutoViewPager extends ViewPager {
                             break;
                     }
                 } else {
-                    mStartX = 0;
+                    startX = 0;
                 }
             }
             return super.onTouchEvent(event);
