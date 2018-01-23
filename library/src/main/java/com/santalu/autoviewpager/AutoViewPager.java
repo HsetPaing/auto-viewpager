@@ -21,6 +21,7 @@ public class AutoViewPager extends ViewPager {
     private boolean autoScrollEnabled;
     private boolean indeterminate;
 
+
     private final Runnable autoScroll = new Runnable() {
         @Override public void run() {
             if (!isShown()) {
@@ -100,12 +101,13 @@ public class AutoViewPager extends ViewPager {
     @Override public boolean onTouchEvent(MotionEvent event) {
         try {
             if (indeterminate) {
-                if (getCurrentItem() == 0 || getCurrentItem() == getAdapter().getCount() - 1) {
+                int lastPosition = getAdapter().getCount() - 1;
+                if (getCurrentItem() == 0 || getCurrentItem() == lastPosition) {
                     final int action = event.getAction();
                     float x = event.getX();
                     switch (action & MotionEvent.ACTION_MASK) {
                         case MotionEvent.ACTION_UP:
-                            if (getCurrentItem() == getAdapter().getCount() - 1 && x < startX) {
+                            if (getCurrentItem() == lastPosition && x < startX) {
                                 post(new Runnable() {
                                     @Override public void run() {
                                         setCurrentItem(0);
