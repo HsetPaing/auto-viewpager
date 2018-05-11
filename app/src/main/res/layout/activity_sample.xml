@@ -5,24 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.santalu.autoviewpager.AutoViewPager
-        android:id="@+id/view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/indicator"
-        app:avp_autoScroll="true"
-        app:avp_duration="5000"
-        app:avp_indeterminate="true"/>
+  <com.santalu.autoviewpager.AutoViewPager
+      android:id="@+id/view_pager"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_above="@+id/indicator"
+      app:avp_autoScroll="true"
+      app:avp_duration="5000"
+      app:avp_indeterminate="true"/>
 
-    <com.rd.PageIndicatorView
-        android:id="@+id/indicator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:padding="16dp"
-        app:piv_selectedColor="@color/colorAccent"
-        app:piv_unselectedColor="@color/colorPrimary"
-        app:piv_viewPager="@+id/view_pager"/>
+  <com.rd.PageIndicatorView
+      android:id="@+id/indicator"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      android:layout_centerHorizontal="true"
+      android:padding="16dp"
+      app:piv_selectedColor="@color/colorAccent"
+      app:piv_unselectedColor="@color/colorPrimary"
+      app:piv_viewPager="@+id/view_pager"/>
 
 </RelativeLayout>

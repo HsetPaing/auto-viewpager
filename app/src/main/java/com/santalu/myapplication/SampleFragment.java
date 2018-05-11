@@ -13,12 +13,15 @@ import android.view.ViewGroup;
 
 public class SampleFragment extends Fragment {
 
-    public static SampleFragment newInstance() {
-        return new SampleFragment();
-    }
+  public static SampleFragment newInstance() {
+    return new SampleFragment();
+  }
 
-    @Nullable @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_sample, container, false);
-    }
+  @Nullable
+  @Override
+  public View onCreateView(LayoutInflater inflater,
+      @Nullable ViewGroup container,
+      @Nullable Bundle savedInstanceState) {
+    return inflater.inflate(R.layout.fragment_sample, container, false);
+  }
 }
