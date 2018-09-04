@@ -4,7 +4,7 @@
 
 ## Sample
 
-<img src="https://github.com/santalu/auto-viewpager/blob/master/screens/sample.gif"/>
+<img src="https://github.com/santalu/auto-viewpager/blob/master/media/sample.gif"/>
 
 ## Usage
 
@@ -18,7 +18,7 @@ allprojects {
 ```
 ```
 dependencies {
-  compile 'com.github.santalu:auto-viewpager:1.0.4'
+  implementation 'com.github.santalu:auto-viewpager:1.0.5'
 }
 ```
 
