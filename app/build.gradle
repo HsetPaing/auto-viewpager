@@ -9,8 +9,8 @@ android {
     applicationId "com.santalu.sample"
     minSdkVersion min_sdk_version
     targetSdkVersion target_sdk_version
-    versionCode 6
-    versionName "1.0.5"
+    versionCode 0
+    versionName "1.0"
   }
 
   buildTypes {

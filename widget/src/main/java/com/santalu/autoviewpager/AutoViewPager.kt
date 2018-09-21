@@ -29,7 +29,7 @@ class AutoViewPager : ViewPager, Runnable {
       val a = context.obtainStyledAttributes(it, R.styleable.AutoViewPager)
       indeterminate = a.getBoolean(R.styleable.AutoViewPager_avp_indeterminate, false)
       autoScroll = a.getBoolean(R.styleable.AutoViewPager_avp_autoScroll, false)
-      duration = a.getInt(R.styleable.AutoViewPager_avp_autoScroll, DEFAULT_DURATION)
+      duration = a.getInt(R.styleable.AutoViewPager_avp_duration, DEFAULT_DURATION)
       a.recycle()
     }
   }
