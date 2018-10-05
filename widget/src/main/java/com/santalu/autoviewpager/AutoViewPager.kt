@@ -10,9 +10,8 @@ class AutoViewPager : ViewPager, Runnable {
 
   private var offset = 0f
 
-  var indeterminate = false
-
   var duration = DEFAULT_DURATION
+  var indeterminate = false
   var autoScroll = false
     set(value) {
       if (value) start() else stop()
@@ -27,10 +26,12 @@ class AutoViewPager : ViewPager, Runnable {
   private fun init(context: Context, attrs: AttributeSet?) {
     attrs?.let {
       val a = context.obtainStyledAttributes(it, R.styleable.AutoViewPager)
-      indeterminate = a.getBoolean(R.styleable.AutoViewPager_avp_indeterminate, false)
-      autoScroll = a.getBoolean(R.styleable.AutoViewPager_avp_autoScroll, false)
-      duration = a.getInt(R.styleable.AutoViewPager_avp_duration, DEFAULT_DURATION)
-      a.recycle()
+      with(a) {
+        indeterminate = getBoolean(R.styleable.AutoViewPager_avp_indeterminate, false)
+        autoScroll = getBoolean(R.styleable.AutoViewPager_avp_autoScroll, false)
+        duration = getInt(R.styleable.AutoViewPager_avp_duration, DEFAULT_DURATION)
+        recycle()
+      }
     }
   }
 
