@@ -6,5 +6,5 @@
     android:layout_height="match_parent"
     android:foreground="?selectableItemBackground"
     android:gravity="center"
-    android:text="Page 1"
+    android:text="@string/page"
     android:textAppearance="@style/TextAppearance.AppCompat.Display2"/>

@@ -62,7 +62,6 @@ class AutoViewPager : ViewPager, Runnable {
 
   override fun run() {
     if (!isShown) return
-
     currentItem = if (currentItem == lastItem) 0 else currentItem + 1
     start()
   }
