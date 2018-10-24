@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
       super.onActivityCreated(savedInstanceState)
       arguments?.let {
         val position = it.getInt(ARG_POSITION)
-        text.text = "Page $position"
+        text.text = getString(R.string.page, position)
       }
     }
 
