@@ -2,9 +2,9 @@ package com.santalu.autoviewpager
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.support.v4.view.ViewPager
 import android.util.AttributeSet
 import android.view.MotionEvent
+import androidx.viewpager.widget.ViewPager
 
 class AutoViewPager : ViewPager, Runnable {
 
@@ -82,5 +82,5 @@ class AutoViewPager : ViewPager, Runnable {
   }
 }
 
-internal val ViewPager.lastItem: Int?
+val ViewPager.lastItem: Int?
   get() = this.adapter?.count?.minus(1)

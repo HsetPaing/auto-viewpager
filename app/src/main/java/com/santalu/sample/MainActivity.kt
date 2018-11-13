@@ -1,13 +1,10 @@
 package com.santalu.sample
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentStatePagerAdapter
-import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.pager
 import kotlinx.android.synthetic.main.fragment_main.text
 
@@ -21,9 +18,9 @@ class MainActivity : AppCompatActivity() {
     // pager.indeterminate = true
   }
 
-  class SampleAdapter(manager: FragmentManager) : FragmentStatePagerAdapter(manager) {
+  class SampleAdapter(manager: androidx.fragment.app.FragmentManager) : androidx.fragment.app.FragmentStatePagerAdapter(manager) {
 
-    override fun getItem(position: Int): Fragment {
+    override fun getItem(position: Int): androidx.fragment.app.Fragment {
       return SampleFragment.newInstance(position)
     }
 
@@ -32,7 +29,7 @@ class MainActivity : AppCompatActivity() {
     }
   }
 
-  class SampleFragment : Fragment() {
+  class SampleFragment : androidx.fragment.app.Fragment() {
 
     override fun onCreateView(
       inflater: LayoutInflater,
