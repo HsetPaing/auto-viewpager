@@ -5,6 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentStatePagerAdapter
 import kotlinx.android.synthetic.main.activity_main.pager
 import kotlinx.android.synthetic.main.fragment_main.text
 
@@ -13,14 +16,17 @@ class MainActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
-    pager.adapter = SampleAdapter(supportFragmentManager)
-    // pager.autoScroll = true
-    // pager.indeterminate = true
+
+    pager.apply {
+      adapter = SampleAdapter(supportFragmentManager)
+      //autoScroll = true
+      //indeterminate = true
+    }
   }
 
-  class SampleAdapter(manager: androidx.fragment.app.FragmentManager) : androidx.fragment.app.FragmentStatePagerAdapter(manager) {
+  class SampleAdapter(manager: FragmentManager) : FragmentStatePagerAdapter(manager) {
 
-    override fun getItem(position: Int): androidx.fragment.app.Fragment {
+    override fun getItem(position: Int): Fragment {
       return SampleFragment.newInstance(position)
     }
 
@@ -29,7 +35,7 @@ class MainActivity : AppCompatActivity() {
     }
   }
 
-  class SampleFragment : androidx.fragment.app.Fragment() {
+  class SampleFragment : Fragment() {
 
     override fun onCreateView(
       inflater: LayoutInflater,
@@ -48,7 +54,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
-
       const val ARG_POSITION = "position"
 
       fun newInstance(position: Int): SampleFragment {
