@@ -1,13 +1,13 @@
 package com.santalu.sample
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentStatePagerAdapter
-import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentStatePagerAdapter
 import kotlinx.android.synthetic.main.activity_main.pager
 import kotlinx.android.synthetic.main.fragment_main.text
 
@@ -16,9 +16,12 @@ class MainActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
-    pager.adapter = SampleAdapter(supportFragmentManager)
-    // pager.autoScroll = true
-    // pager.indeterminate = true
+
+    pager.apply {
+      adapter = SampleAdapter(supportFragmentManager)
+      //autoScroll = true
+      //indeterminate = true
+    }
   }
 
   class SampleAdapter(manager: FragmentManager) : FragmentStatePagerAdapter(manager) {
@@ -51,7 +54,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
-
       const val ARG_POSITION = "position"
 
       fun newInstance(position: Int): SampleFragment {

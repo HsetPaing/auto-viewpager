@@ -2,9 +2,9 @@ package com.santalu.autoviewpager
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.support.v4.view.ViewPager
 import android.util.AttributeSet
 import android.view.MotionEvent
+import androidx.viewpager.widget.ViewPager
 
 class AutoViewPager : ViewPager, Runnable {
 
@@ -14,6 +14,7 @@ class AutoViewPager : ViewPager, Runnable {
   var indeterminate = false
   var autoScroll = false
     set(value) {
+      field = value
       if (value) start() else stop()
     }
 
@@ -35,30 +36,32 @@ class AutoViewPager : ViewPager, Runnable {
     }
   }
 
-  override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
-    if (indeterminate || autoScroll) {
-      val action = ev?.actionMasked
-      if (action == MotionEvent.ACTION_DOWN) {
-        offset = ev.x
-        // reset auto scroll on user interaction
+  override fun onInterceptTouchEvent(event: MotionEvent?): Boolean {
+    event
+      ?.takeIf { indeterminate || autoScroll }
+      ?.actionMasked
+      .takeIf { it == MotionEvent.ACTION_DOWN }
+      ?.run {
+        offset = event!!.x
         reset()
       }
-    }
-    return super.onInterceptTouchEvent(ev)
+    return super.onInterceptTouchEvent(event)
   }
 
   @SuppressLint("ClickableViewAccessibility")
-  override fun onTouchEvent(ev: MotionEvent?): Boolean {
-    if (indeterminate) {
-      val action = ev?.actionMasked
-      if (action == MotionEvent.ACTION_UP) {
-        val currentOffset = ev.x
-        if (currentItem == lastItem && offset > currentOffset) {
-          post { setCurrentItem(0, false) }
-        }
+  override fun onTouchEvent(event: MotionEvent?): Boolean {
+    event
+      ?.takeIf { indeterminate }
+      ?.actionMasked
+      .takeIf { it == MotionEvent.ACTION_UP }
+      ?.run {
+        event?.x
+          ?.takeIf { it < offset && currentItem == lastItem }
+          ?.run {
+            post { setCurrentItem(0, false) }
+          }
       }
-    }
-    return super.onTouchEvent(ev)
+    return super.onTouchEvent(event)
   }
 
   override fun run() {
@@ -77,10 +80,9 @@ class AutoViewPager : ViewPager, Runnable {
   }
 
   companion object {
-
     const val DEFAULT_DURATION = 5000
   }
 }
 
-internal val ViewPager.lastItem: Int?
-  get() = this.adapter?.count?.minus(1)
+val ViewPager.lastItem: Int?
+  get() = adapter?.count?.minus(1)
