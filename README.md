@@ -18,7 +18,7 @@ allprojects {
 ```
 ```
 dependencies {
-  implementation 'com.github.santalu:auto-viewpager:1.0.7'
+  implementation 'com.github.santalu:auto-viewpager:1.0.8'
 }
 ```
 
