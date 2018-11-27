@@ -11,7 +11,9 @@ class AutoViewPager : ViewPager, Runnable {
   private var offset = 0f
 
   var duration = DEFAULT_DURATION
+
   var indeterminate = false
+
   var autoScroll = false
     set(value) {
       field = value
@@ -37,8 +39,7 @@ class AutoViewPager : ViewPager, Runnable {
   }
 
   override fun onInterceptTouchEvent(event: MotionEvent?): Boolean {
-    event
-      ?.takeIf { indeterminate || autoScroll }
+    event?.takeIf { indeterminate || autoScroll }
       ?.actionMasked
       .takeIf { it == MotionEvent.ACTION_DOWN }
       ?.run {
@@ -50,8 +51,7 @@ class AutoViewPager : ViewPager, Runnable {
 
   @SuppressLint("ClickableViewAccessibility")
   override fun onTouchEvent(event: MotionEvent?): Boolean {
-    event
-      ?.takeIf { indeterminate }
+    event?.takeIf { indeterminate }
       ?.actionMasked
       .takeIf { it == MotionEvent.ACTION_UP }
       ?.run {
@@ -83,6 +83,3 @@ class AutoViewPager : ViewPager, Runnable {
     const val DEFAULT_DURATION = 5000
   }
 }
-
-val ViewPager.lastItem: Int?
-  get() = adapter?.count?.minus(1)
